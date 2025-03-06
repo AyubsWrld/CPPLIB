@@ -20,6 +20,8 @@ std::vector<int> findMissingAndRepeatingValues(std::vector<std::vector<int>>& gr
 
   std::sort( list.begin() , list.end() ) ; 
 
+  for ( int )
+
   for( i = 0 ; i <  ( SIZE*SIZE ) - 1  ; i++ ) { 
     if ( list[ i ] == list[ i + 1]) 
     {
