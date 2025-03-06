@@ -1,0 +1,5 @@
+main.cpp:18:33: error: invalid initialization of non-const reference of type 'std::vector<std::vector<int> >&' from an rvalue of type 'std::vector<std::vector<int> >*'
+   18 |   findMissingAndRepeatingValues(&grid) ;
+      |                                 ^~~~~
+main.cpp:5:79: note: in passing argument 1 of 'std::vector<int> findMissingAndRepeatingValues(std::vector<std::vector<int> >&)'
+    5 | std::vector<int> findMissingAndRepeatingValues(std::vector<std::vector<int>>& grid){
