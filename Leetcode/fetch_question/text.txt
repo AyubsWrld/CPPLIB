@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Leetcode 1. Two Sum</title>
+    <meta name="description"
+          content="Check Java/C++ solution and Company Tag of Leetcode 1 for free。Unlock prime for Leetcode 1">
+    <meta name="keywords"
+          content="Leetcode 1, 1. Two Sum, leetcode, company tag, company problem list">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/markdown.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        .div-width{
+        	width: 70%;
+        	margin: auto;
+        }
+        @media screen and (min-width: 0px) and (max-width: 560px) {
+			.div-width{
+	        	width: 95%;
+	        	margin: auto;
+	        }
+		}
+
+
+
+
+    </style>
+    <script src="css/run_prettify.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script src="css/run_prettify.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K108N8L891"></script>
+    <script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-K108N8L891');
+
+
+
+
+    </script>
+    <script src="https://apis.google.com/js/platform.js"></script>
+
+</head>
+
+<body>
+
+<div style="width: 100%;background:#000000">
+    <a style="margin-bottom: 20px;padding-top:20px;padding-left:20px;color:#ffffff;font-size:20px;text-decoration: none;font-weight:bold;"
+       href="https://leetcode.ca">Leetcode Solutions Java Python C++</a>
+</div>
+
+<div style="width:100%;font-size:18px;background:#f0ad4e;color:#ffffff;">
+    All contents and pictures on this website come from the Internet and are updated regularly every week. They are for personal study and research only, and should not be used for commercial purposes. Thank you for your cooperation.
+</div>
+
+
+<div class="div-width" style="padding-top: 30px">
+    <div>
+        <h5> Welcome to Subscribe On Youtube: 
+    </div>
+    <div class="g-ytsubscribe" data-channelid="UCslk3mmaMJy1enit3L9vWig" data-layout="full" data-count="hidden"></div>
+</div>
+
+<div class="div-width">
+    <h1>1. Two Sum</h1>
+</div>
+
+<div class="markdown-body div-width" style="margin-top: 20px">
+
+    <p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they
+        add up to a specific target.</p>
+
+    <p>You may assume that each input would have <strong><em>exactly</em></strong> one solution, and
+        you may not use the <em>same</em> element twice.</p>
+
+    <p><strong>Example:</strong></p>
+
+    <pre>
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[<strong>0</strong>] + nums[<strong>1</strong>] = 2 + 7 = 9,
+return [<strong>0</strong>, <strong>1</strong>].
+</pre>
+
+
+    <div>
+        <h3>Difficulty:</h3>
+        <span class="label label-success">Easy</span>
+    </div>
+
+    <div>
+        <h3>Lock:</h3>
+        <span class="label label-default">Normal</span>
+    </div>
+
+    <div>
+        <h3>Company:</h3>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Adobe">Adobe</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Aetion">Aetion</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Affirm">Affirm</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Airbnb">Airbnb</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Alibaba">Alibaba</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Amazon">Amazon</a></span>
+        <span class=" label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                              href="https://leetcode.ca/tags/#Apple">Apple</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Audible">Audible</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Baidu">Baidu</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#BlackRock">BlackRock</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Bloomberg">Bloomberg</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Booking.com">Booking.com</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Box">Box</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#ByteDance">ByteDance</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Cisco">Cisco</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Citadel">Citadel</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Citrix">Citrix</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Deutsche Bank">Deutsche Bank</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#DiDi">DiDi</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Drawbridge">Drawbridge</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Dropbox">Dropbox</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#eBay">eBay</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#EMC">EMC</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Expedia">Expedia</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Facebook">Facebook</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#FactSet">FactSet</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#GE Digital">GE Digital</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#GoDaddy">GoDaddy</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Goldman Sachs">Goldman Sachs</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Google">Google</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Groupon">Groupon</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Huawei">Huawei</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#IBM">IBM</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Indeed">Indeed</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Intel">Intel</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Intuit">Intuit</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#caMorgan">caMorgan</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#LinkedIn">LinkedIn</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Lyft">Lyft</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#MAQ Software">MAQ Software</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Mathworks">Mathworks</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Microsoft">Microsoft</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Morgan Stanley">Morgan Stanley</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#NetEase">NetEase</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Nvidia">Nvidia</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Oracle">Oracle</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Paypal">Paypal</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Qualcomm">Qualcomm</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Quora">Quora</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Radius">Radius</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Roblox">Roblox</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Salesforce">Salesforce</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Samsung">Samsung</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#SAP">SAP</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#ServiceNow">ServiceNow</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Snapchat">Snapchat</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Splunk">Splunk</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Spotify">Spotify</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Tableau">Tableau</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Tencent">Tencent</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Twilio">Twilio</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Twitter">Twitter</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Two Sigma">Two Sigma</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Uber">Uber</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Valve">Valve</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Visa">Visa</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#VMware">VMware</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Walmart Labs">Walmart Labs</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Wayfair">Wayfair</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Wish">Wish</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Works Applications">Works Applications</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Yahoo">Yahoo</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Yandex">Yandex</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Yelp">Yelp</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Zillow">Zillow</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Zoho">Zoho</a></span>
+    </div>
+
+
+    <div>
+        <h3>Problem Solution</h3>
+        <a
+           style="font-size:20px;color: #0066cc;margin-bottom:15px;text-decoration:underline"
+           href="https://leetcode.ca/2015-12-01-1-Two-Sum">1-Two-Sum</a>
+    </div>
+
+    <div>
+        <h3>All Problems:</h3>
+        <a
+           style="font-size:20px;color: #0066cc;margin-bottom:15px;text-decoration:underline"
+           href="https://leetcode.ca/all/problems.html">Link to All Problems</a>
+    </div>
+
+    <div style="width:100%;font-size:18px;background:#f0ad4e;color:#ffffff;">
+        All contents and pictures on this website come from the Internet and are updated regularly every week. They are for personal study and research only, and should not be used for commercial purposes. Thank you for your cooperation.
+    </div>
+
+
+    <div style="width: 100%; text-align: center; margin: auto;background:#ffffff">
+
+
+    </div>
+</div>
+
+
+</body>
+</html>
+p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they
+        add up to a specific target.</p>
+
+    <p>You may assume that each input would have <strong><em>exactly</em></strong> one solution, and
+        you may not use the <em>same</em> element twice.</p>
+
+    <p><strong>Example:</strong></p>
+
+    <pre>
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[<strong>0</strong>] + nums[<strong>1</strong>] = 2 + 7 = 9,
+return [<strong>0</strong>, <strong>1</strong>].
+</pre>
+
+
+    <div>
+        <h3>Difficulty:</h3>
+        <span class="label label-success">Easy</span>
+    </div>
+
+    <div>
+        <h3>Lock:</h3>
+        <span class="label label-default">Normal</span>
+    </div>
+
+    <div>
+        <h3>Company:</h3>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Adobe">Adobe</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Aetion">Aetion</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Affirm">Affirm</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Airbnb">Airbnb</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Alibaba">Alibaba</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Amazon">Amazon</a></span>
+        <span class=" label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                              href="https://leetcode.ca/tags/#Apple">Apple</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Audible">Audible</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Baidu">Baidu</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#BlackRock">BlackRock</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Bloomberg">Bloomberg</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Booking.com">Booking.com</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Box">Box</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#ByteDance">ByteDance</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Cisco">Cisco</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Citadel">Citadel</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Citrix">Citrix</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Deutsche Bank">Deutsche Bank</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#DiDi">DiDi</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Drawbridge">Drawbridge</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Dropbox">Dropbox</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#eBay">eBay</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#EMC">EMC</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Expedia">Expedia</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#Facebook">Facebook</a></span>
+        <span class="label label-default"><a style="color: #ffffff;margin-bottom:15px;"
+                                             href="https://leetcode.ca/tags/#FactSet">FactSet</a></span>
+        <span class="label la

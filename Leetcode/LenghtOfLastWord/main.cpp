@@ -3,15 +3,30 @@
 
 
 
+
+
+// Why didn't >= 0 work ? 
+
 int lengthOfLastWord(std::string s)
 {
   size_t size = s.length() ; 
-  while( s[size] > 0 ){
-    std::cout << s[size] << " " ;
-    -- size ;
+  int len = 0 ; 
+  --size ; 
+
+  // Go to the first occurence of the letter 
+  
+  while( s[size] == ' ' ) {
+    --size ;
   }
-  std::cout << std::endl; 
-  return 0 ; 
+
+
+  while( s[size] != ' ' )
+  {
+    ++ len ; 
+    --size ; 
+  }
+  std::cout << len;
+  return len ; 
 }
 
 int main() 
