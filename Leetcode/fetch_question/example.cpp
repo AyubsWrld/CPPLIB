@@ -1,8 +1,8 @@
 #include <iostream>
 #include <curl/curl.h>
+#include <filesystem>
 #include <regex>
-
-
+#include <vector>
 
 typedef struct {
   std::string title    ; 
@@ -38,9 +38,42 @@ size_t parse_title( HTML* html )
     return -1 ; 
   }
   html->title = m.prefix() ; 
-  std::cout << html->title << std::endl ;
   return 0 ; 
 }
+
+size_t set_acronym( HTML* html )
+{
+  std::string acronym ; 
+  std::string::iterator itr_b = html->title.begin() ; 
+  std::string::iterator itr_e = html->title.end() ; 
+  while ( itr_b != itr_e ) {
+    if ( *itr_b == ' ' ) {
+      acronym += *++itr_b ;
+    }else {
+      ++itr_b ;
+    }
+  }
+  if(acronym.empty()){
+    return -1 ; 
+  }
+  html->acronym = acronym ; 
+  return 0  ;
+}
+
+size_t makedir( std::string& directory ) 
+{
+  if ( std::filesystem::exists( directory ) ) {
+    std::cout << "directory exists" << std::endl ;
+    return -1 ;
+  }
+
+  if ( !std::filesystem::create_directory( directory ) ) {
+    std::cout << "Failed to create directory" << std::endl ;
+    return -1 ;
+  }
+  std::cout << "Directory Successfully Created " << std::endl ;
+  return 0  ; 
+}  
 
 size_t  parse_html( HTML* html ) {
 
@@ -48,11 +81,18 @@ size_t  parse_html( HTML* html ) {
   if ( parse_code ) {
     return -1 ; 
   }
-  return 0 ; 
-}
 
-size_t make_directory() { 
-  system("mkdir test") ;
+  parse_code = set_acronym( html ) ; 
+
+  if ( parse_code ) {
+    return -1 ; 
+  }
+
+  parse_code = set_acronym( html ) ; 
+
+  if ( parse_code ) {
+    return -1 ; 
+  }
   return 0 ; 
 }
 
@@ -75,7 +115,7 @@ int main (int argc, char *argv[]) {
   // ========================================================= HTML Parse ======================================================================
 
   parse_html( &html ) ; 
-  make_directory() ; 
+  makedir( html.acronym ) ;
 
   // ========================================================= HTML Parse ======================================================================
   
