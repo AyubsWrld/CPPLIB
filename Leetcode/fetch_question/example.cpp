@@ -2,7 +2,9 @@
 #include <curl/curl.h>
 #include <filesystem>
 #include <regex>
+#include <cstring>
 #include <vector>
+#include <fstream>
 
 typedef struct {
   std::string title    ; 
@@ -75,6 +77,21 @@ size_t makedir( std::string& directory )
   return 0  ; 
 }  
 
+/*size_t parse_body( HTML* html ){*/
+/*  std::regex regex("<p>(.*?)</p>");*/
+/*  std::smatch match;*/
+/*  std::string description;*/
+/**/
+/*  auto it = html.cbegin();*/
+/*  while (std::regex_search(it, html.cend(), match, regex)) {*/
+/*      description += match[1].str() + "\n";*/
+/*      it = match.suffix().first;*/
+/*  }*/
+/*  return 0 ;*/
+/**/
+/*}*/
+
+
 size_t  parse_html( HTML* html ) {
 
   size_t parse_code = parse_title( html ) ; 
@@ -93,7 +110,24 @@ size_t  parse_html( HTML* html ) {
   if ( parse_code ) {
     return -1 ; 
   }
+
+  /*parse_code = parse_body( html )  ; */
   return 0 ; 
+}
+
+
+// Needs work 
+
+size_t create_file( HTML* html )
+{
+  std::string path = static_cast<std::string>( std::filesystem::current_path() )  + "/"  + html->acronym + "/outline.md" ;
+  std::ofstream ofs(path) ; 
+  ofs << "# " << html->title ; 
+  if( !ofs ) {
+    return -1 ; 
+  }
+  ofs.close() ; 
+  return 0 ;  
 }
 
 int main (int argc, char *argv[]) {
@@ -103,7 +137,7 @@ int main (int argc, char *argv[]) {
   
   HTML html ; 
   CURL* curl = curl_easy_init() ; 
-  CURLcode res = curl_easy_setopt( curl , CURLOPT_URL , "https://leetcode.ca/all/1.html") ; 
+  CURLcode res = curl_easy_setopt( curl , CURLOPT_URL , "https://leetcode.ca/all/30.html") ; 
   res = curl_easy_setopt( curl , CURLOPT_WRITEFUNCTION , write_callback ) ;
   res = curl_easy_setopt( curl , CURLOPT_WRITEDATA , (HTML* )&html )  ; 
   curl_easy_perform( curl ) ;
@@ -116,6 +150,7 @@ int main (int argc, char *argv[]) {
 
   parse_html( &html ) ; 
   makedir( html.acronym ) ;
+  create_file( &html ) ;  
 
   // ========================================================= HTML Parse ======================================================================
   
