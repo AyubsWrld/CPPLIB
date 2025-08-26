@@ -1,0 +1,7 @@
+#!/usr/sbin/bash
+
+while [[ true ]]; do
+  ./exec
+  sleep 0.1
+  clear
+done

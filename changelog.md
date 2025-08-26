@@ -1,0 +1,4 @@
+- [x] Randomly Generate list of Items Configurations 
+- [ ] Generate buffer large enough to fit items 
+- [ ] Call constructor of each item and placement new inside buffer
+- [ ] Get Shared Pointers to objects. 
