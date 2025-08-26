@@ -1,8 +1,16 @@
 #include <iostream>
 #include <fstream>
+#include <math.h>
 #include <random>
 #include <array>
 #include <unordered_map>
+
+
+#define TILE_COUNT_HORIZONTAL 25 
+#define TILE_COUNT_VERITCAL TILE_COUNT_HORIZONTAL
+
+#define HALF_COUNT_HORIZONTAL 12
+#define HALF_COUNT_VERITCAL 12
 
 enum class ECalamity
 {
@@ -19,6 +27,12 @@ struct RGen
     std::random_device d; 
     std::uniform_int_distribution<> u{Range.first, Range.second} ; 
     return u(d);  
+  }
+
+  static bool BooleanFromProbability(float Proability)
+  {
+    float v = (float) RGen::GenerateRandom({0,10}) / 10 ;
+    return v >= Proability;
   }
 };
 
@@ -53,11 +67,32 @@ struct Tile
   Coordinate Coordinates{};
   ECalamity Event{}; 
 
+  inline constexpr auto Value(std::pair<short,short> Coordinates)
+  {
+    double p1{std::pow(Coordinates.first - HALF_COUNT_HORIZONTAL, 2)};
+    double p2{std::pow(Coordinates.second- HALF_COUNT_VERITCAL, 2)};
+    return std::sqrt(p1 + p2) ; 
+  }
+
+  inline constexpr ECalamity GenerateCalamity(float Distance)
+  {
+    if(Distance < 4)
+    {
+      return ECalamity::EC_Terminus; 
+    }else if (Distance < 7) {
+      return ECalamity::EC_Fatalis; 
+    }else if(Distance < 8)
+    {
+      return ECalamity::EC_Majoris; 
+    }
+    return ECalamity::EC_Minoris; 
+  }
+
   Tile(const Coordinate& b)
     : Coordinates(b)
   {
-    auto rng_num  = RGen::GenerateRandom({0,100}) ;
-    Event = static_cast<decltype(Event)>(rng_num % 4); 
+    auto rng_num = RGen::GenerateRandom({0,100}) ;
+    Event = RGen::BooleanFromProbability(0.8) ? GenerateCalamity(Value(b)) : static_cast<ECalamity>(rng_num % 4); 
     auto cb = Callbacks[Event] ; 
     invocable = static_cast<decltype(invocable)>(cb[rng_num % 2]); 
   }
@@ -66,10 +101,12 @@ struct Tile
     : Coordinates(x,y)
   {
     auto rng_num  = RGen::GenerateRandom({0,100}) ;
-    Event = static_cast<decltype(Event)>(rng_num % 4); 
+    //Event = static_cast<decltype(Event)>(rng_num % 4); 
+    Event = RGen::BooleanFromProbability(0.8) ? GenerateCalamity(Value({x,y})) : static_cast<ECalamity>(rng_num % 4); 
     auto cb = Callbacks[Event] ; 
     invocable = static_cast<decltype(invocable)>(cb[rng_num % 2]); 
   }
+
 };
 
 struct Board
@@ -85,7 +122,7 @@ private:
 
 
 
-unsigned char Board::Representation[25][25] = 
+unsigned char Board::Representation[TILE_COUNT_HORIZONTAL][TILE_COUNT_VERITCAL] = 
   {
     {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
     {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
@@ -187,6 +224,13 @@ struct BoardOperon
     }
   }
 
+  std::pair<float,float> GetNormalized(std::pair<short,short> v)
+  {
+    float x{(float) v.first / TILE_COUNT_HORIZONTAL}; 
+    float y{(float) v.first / TILE_COUNT_VERITCAL}  ; 
+    return {x,y} ; 
+  }
+
   void Invoke(int x)
   {
     if(x < 0 || x >= 138)
@@ -195,12 +239,15 @@ struct BoardOperon
     auto Coords = Board::Playable[x].Coordinates ;
     Board::Representation[Coords.first][Coords.second] = 'x';
   }
+
+  float GenerateHeauristic(short x, short y)
+  {
+    return 0.0f;
+  }
 };
 
 
 /* Each coordinate has a tile */
-
-
 
 unsigned char GenerateGlyph()
 {
@@ -214,14 +261,5 @@ int main (int argc, char *argv[])
 {
   BoardOperon b; 
   b.ShowBoard(); 
-
-  while(true)
-  {
-    int z{};
-    std::cout << "Please Enter a number: " ;
-    std::cin >> z ; 
-    b.Invoke(z);
-    b.ShowBoard(); 
-  }
   return 0; 
 }
