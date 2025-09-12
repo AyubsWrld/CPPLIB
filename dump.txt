@@ -1,0 +1,153 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+#include <_ctype.h>
+#include <stdbool.h>
+#include <emmintrin.h>
+#include <sys/_types/_u_int32_t.h>
+
+
+void clean_str(char** str);
+void clean_ptr(void** ptr);
+
+#define     RESERVED_ID_LEN      2
+#define     CMP_MASK_TRUE        0xFFFF
+#define     BUFFER_LENGTH        16
+#define     ZERO_CHAR            (char)0
+#define     VAL_ARGS()           if(argv <= 1 ){ printf("Error usage: %s <username>\n", *argc); return EXIT_FAILURE; }
+#define     AUTO_CLEAN_STR       __attribute__((cleanup(clean_str))) char* 
+#define     AUTO_CLEAN_MALLOC    __attribute__((cleanup(clean_ptr))) void* 
+#define     FORCEINLINE          __attribute__((__always_inline__))
+
+/* purposefully adding right padding */ 
+static const char reserved_identifiers[RESERVED_ID_LEN][16] = {
+  {'r', 'o', 'o', 't', ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR,ZERO_CHAR },
+  {'a', 'd', 'm', 'i', 'n', ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR, ZERO_CHAR },
+};
+
+static const char buffer_mask[BUFFER_LENGTH] = { (char) 0 };
+static const char t_buffer_mask[BUFFER_LENGTH] = { '#',  '#',  '#',  '#',  '#',  '#',  '#',  '#',  '#',  '#',  '#',  '#',  '#',  '#',  '#',  '#' };
+
+typedef struct FBufferWrapper{ 
+  char buffer[16];
+}FBufferWrapper;
+
+__attribute__((__always_inline__)) bool __faststrcmp(const char* restrict C1,const char* restrict  C2)
+{
+  if(!C1 || !C2) return false;
+
+  __m128i V1 = _mm_load_si128((__m128i*) C1);
+  __m128i V2 = _mm_load_si128((__m128i*) C2);
+  int res = _mm_movemask_epi8(_mm_cmpeq_epi32(V1, V2)) ;
+  printf("Byte value: %x\n", res);
+  return  res == CMP_MASK_TRUE;
+}
+
+void clean_ptr(void** ptr)
+{
+  if(*ptr)
+  {
+    printf("Cleaning memory address at %p\n", *ptr);
+    free(*ptr);
+  }
+}
+
+typedef union ptrs
+{
+  int* iptr;
+  char* cptr;
+}ptrs __attribute__((transparent_union));
+
+void clean_str(char** str)
+{
+  printf("Cleaning");
+}
+
+
+bool is_reserved(const char* value)
+{
+  if(!(__faststrcmp(value, reserved_identifiers[0]))) return true;
+  if(!(__faststrcmp(value, reserved_identifiers[1]))) return true;
+  return false;
+}
+
+bool is_all_lower(const char* const str)
+{
+  for(unsigned long i = 0 ; i < strlen(str) ; i++)
+  {
+    if(!islower(str[i])) return false;
+  }
+  return true;
+}
+
+FORCEINLINE bool is_valid_len(const char* const str) 
+{
+  unsigned long slen = strlen(str); 
+  return ( slen >= 3 && slen < 16 );
+}
+
+void rmspaces(char* const str)
+{
+  for(int i = 0 ; i < strlen(str); i++)
+    if(str[i] == ' ') str[i] = ' ';
+}
+
+bool ext_isalnum(const char* str)
+{
+  for(unsigned long i = 0 ; i < strlen(str) ; i++)
+    if(!isalnum(str[i]) && str[i] != '_') return false ;
+  return true;
+}
+
+__attribute__((__pure__)) bool is_valid_username(const char* const str)
+{
+  return  is_valid_len(str) &&
+          is_all_lower(str) &&
+          ext_isalnum(str) &&
+          !is_reserved(str); 
+}
+
+__attribute__((pure)) bool UNITTEST(size_t count, ...)
+{
+  va_list args;
+  va_start(args, count);
+
+  for (size_t i = 0; i < count; i++) 
+  {
+    const char* const str = va_arg(args, char*);
+    if(!is_valid_username(str))
+    {
+      printf("\"%s\" violated rules\n", str);
+      va_end(args);
+      return false;
+    }
+  }
+  return true; 
+}
+
+
+void capture(char* argc[], FBufferWrapper* outBuffer)
+{
+  if (!outBuffer || !argc[1]) return;
+
+  size_t len = strlen(argc[1]);
+  if (len >= BUFFER_LENGTH) len = BUFFER_LENGTH;
+
+  memcpy(outBuffer->buffer, argc[1], len);
+
+  if (len < BUFFER_LENGTH)
+    memcpy(outBuffer->buffer + len, buffer_mask + (len - 1), BUFFER_LENGTH - len);
+    //memcpy(outBuffer->buffer + len, t_buffer_mask + (len - 1), BUFFER_LENGTH - len);
+}
+
+int main(int argv, char* argc[])
+{
+  VAL_ARGS()
+
+  FBufferWrapper Buff;
+  capture(argc, &Buff);
+
+  __faststrcmp(reserved_identifiers[0], Buff.buffer);
+  return EXIT_SUCCESS;
+}
