@@ -35,6 +35,7 @@ void destroy_fast(const T& obj) {
     std::cout << "Non-trivially destructible\n";
 }
 
+
 int main (int argc, char *argv[]) 
 {
   int x{};
